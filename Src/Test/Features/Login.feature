@@ -1,9 +1,20 @@
 Feature: Login
 
-    Scenario Outline: Login to application
+    Background: User authorised and navigated to home page
+        Given User navigate to the base page
+
+    Scenario Outline: Successful login to application
         When User with "<login>" and "<password>" authorise into account
-        Then User should be navigated to the home page 
+        Then Account username should be "<username>"
 
         Examples:
-          | login                 | password       |
-          | paprika0020@gmail.com | 423489123789op |
+          | login           | password  | username      |
+          | valid@gmail.com | validPass | History Maker |
+
+    Scenario Outline: Invalid credentials scenario
+        When User with "<login>" and "<password>" authorise into account
+        Then Incorrect credentials modal contains "<text>"
+
+        Examples:
+          | login                      | password | text                               |
+          | SomeInvalidCreds@gmail.com | 123      | Unrecognized username or password. |

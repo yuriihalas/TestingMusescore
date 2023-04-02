@@ -5,11 +5,6 @@ namespace TestingMusescore.Test.Core.Utils;
 
 public static class WebDriverManager
 {
-    private static readonly string PathToDriver =
-        SourceUtils.GetSourceDir() + "Src/Test/Resources/Chromedriver/chromedriver.exe";
-
-    private static readonly int ImplicitWaitTimeoutSec = 3;
-
     private static IWebDriver _currentDriver;
 
     public static IWebDriver GetDriver()
@@ -23,12 +18,20 @@ public static class WebDriverManager
         return _currentDriver;
     }
 
+    public static void CloseDriver()
+    {
+        _currentDriver.Quit();
+        _currentDriver = null;
+    }
+
     private static void CreateChromeWebDriver()
     {
         ChromeOptions chromeOptions = new ChromeOptions();
-        _currentDriver = new ChromeDriver();
-        //_currentDriver.Url = WebConstants.BaseUrl;
-        //_currentDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(ImplicitWaitTimeoutSec);
-        //_currentDriver.Manage().Window.Maximize();
+        chromeOptions.PageLoadStrategy = PageLoadStrategy.Eager;
+        _currentDriver = new ChromeDriver(WebConstants.PathToDriver, chromeOptions);
+        _currentDriver.Url = WebConstants.BaseUrl;
+        _currentDriver.Manage().Timeouts().ImplicitWait.Add(TimeSpan.FromSeconds(WebConstants.ImplicitWaitTimeoutSec));
+        _currentDriver.Manage().Timeouts().PageLoad.Add(TimeSpan.FromSeconds(WebConstants.ImplicitWaitTimeoutSec));
+        _currentDriver.Manage().Window.Maximize();
     }
 }

@@ -73,17 +73,27 @@ namespace TestingMusescore.Src.Test.Features
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 3
+    #line hidden
+#line 4
+        testRunner.Given("User navigate to the base page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+        }
+        
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Login to application")]
-        [NUnit.Framework.TestCaseAttribute("paprika0020@gmail.com", "423489123789op", null)]
-        public virtual void LoginToApplication(string login, string password, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("Successful login to application")]
+        [NUnit.Framework.TestCaseAttribute("galasayra123213@gmail.com", "423489123789", "History Maker", null)]
+        public virtual void SuccessfulLoginToApplication(string login, string password, string username, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("login", login);
             argumentsOfScenario.Add("password", password);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Login to application", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 3
+            argumentsOfScenario.Add("username", username);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Successful login to application", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 6
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -103,11 +113,46 @@ namespace TestingMusescore.Src.Test.Features
             else
             {
                 this.ScenarioStart();
-#line 4
-        testRunner.When(string.Format("User with \"{0}\" and \"{1}\" authorise into account", login, password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 3
+    this.FeatureBackground();
 #line hidden
-#line 5
-        testRunner.Then("User should be navigated to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Invalid credentials scenario")]
+        [NUnit.Framework.TestCaseAttribute("SomeInvalidCreds@gmail.com", "123", "Unrecognized username or password.", null)]
+        public virtual void InvalidCredentialsScenario(string login, string password, string text, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("login", login);
+            argumentsOfScenario.Add("password", password);
+            argumentsOfScenario.Add("text", text);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Invalid credentials scenario", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 14
+    this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 3
+    this.FeatureBackground();
 #line hidden
             }
             this.ScenarioCleanup();
